@@ -73,7 +73,7 @@
 		for(i=0;i<todosPerPage;i++){
 			$('#tickets').append(ticket);
 			$('.ticket').last().attr('id',''+(i+1));
-         	$('#tickets #'+(i+1)).html(ticketTitle+ticketBody);
+         		$('#tickets #'+(i+1)).html(ticketTitle+ticketBody);
 			$('#tickets #'+(i+1)+' .title').html('<strong> Task '+todos[i].id+'</strong>');
 			$('#tickets #'+(i+1)+' .description').html(todos[i].title);
 			if(todos[i].completed)
@@ -94,19 +94,19 @@
 			
 			
 			for(i=start;i<start+todosPerPage;i++){
-			if(i == todos.length)
-				break;
-			$('#tickets').append(ticket);
-			$('.ticket').last().attr('id',''+(i+1));
-         	$('#tickets #'+(i+1)).html(ticketTitle+ticketBody);
-			$('#tickets #'+(i+1)+' .title').html('<strong> Task '+todos[i].id+'</strong>');
-			$('#tickets #'+(i+1)+' .description').html(todos[i].title);
-			if(todos[i].completed)
-				$('#tickets #'+(i+1)).append(ticketCompleted);
-			else
-				$('#tickets #'+(i+1)).append(ticketNotCompleted);
+				if(i == todos.length)
+					break;
+				$('#tickets').append(ticket);
+				$('.ticket').last().attr('id',''+(i+1));
+         			$('#tickets #'+(i+1)).html(ticketTitle+ticketBody);
+				$('#tickets #'+(i+1)+' .title').html('<strong> Task '+todos[i].id+'</strong>');
+				$('#tickets #'+(i+1)+' .description').html(todos[i].title);
+				if(todos[i].completed)
+					$('#tickets #'+(i+1)).append(ticketCompleted);
+				else
+					$('#tickets #'+(i+1)).append(ticketNotCompleted);
 			
-		}
+			}
 			$('.ticket').matchHeight(); 		
 		});
 		
