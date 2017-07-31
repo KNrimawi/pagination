@@ -1,0 +1,56 @@
+@font-face{
+	src: url('../fonts/Raleway/Raleway-Regular.ttf');
+	font-family: raleway;
+}
+@font-face{
+	src: url('../fonts/SansationLight/SansationLight.ttf');
+	font-family: sansation;
+}
+
+.ticket{
+	background-color: rgba(247,247,247,1.00);
+	box-shadow: 0px 2px 5px 0px gray;
+	padding:10px;
+	margin-bottom: 20px;
+	color:white;
+	font-family: raleway;
+	position: relative;
+}
+.ticket:nth-child(even){
+	background-color:rgb(217,91,67);
+	color:white;
+	
+}
+.ticket:nth-child(odd){
+	background-color: rgb(192,41,66);
+	color:white;
+}
+
+
+h1{
+	font-family: sansation;
+	font-weight: bold;
+	color:rgb(83,119,122);
+	
+}
+body{
+	background-color: rgba(255,0,0,0.1);
+}
+.ticket button{
+	position: absolute;
+	right:3px;
+	bottom: 3px;
+}
+.pagination .active a,.pagination .active a:hover,.pagination .active a:active,.pagination .active a:focus {
+	background-color: rgb(192,41,66);
+	border:none;
+}
+
+.pagination li a {
+	color:rgb(192,41,66);
+	
+}
+.pagination li a:hover{
+	color:white;
+	background-color: rgba(217,91,67,0.5);
+}

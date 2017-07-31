@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+ 	<meta name="viewport" content="width = device-width, initial-scale = 1">
+  <title></title>
+  
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="styles/mycss.css">
+</head>
+<body>
+<div class="container" id="tickets">
+<h1>Tasks</h1>
+   
+      
+  
+  
+  
+   
+  
+</div>
+<div class="container">
+<div class="row text-center">
+    <ul class="pagination" style="margin : 0 auto 0 auto">
+		
+	</ul>
+   </div>
+	
+</div>
+ 
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+ <script src="scripts/jquery.matchHeight-min.js"></script>
+  <script>
+	  var i ;
+    $(function(){
+		
+		var numOfTasks,
+			numOfPages,
+			ticket             = ' <div class="col-xs-12 col-sm-offset-1 ticket col-sm-3" id="" ></div>',
+			ticketTitle        = ' <h5 class="title"></h5>',
+			ticketBody         = ' <p class="description"></p><br>',
+			ticketCompleted    = '<button  class="btn btn-sm pull-right btn-success" title="completed task"><span class="glyphicon glyphicon-ok" style="color:white"></span> completed</button>',
+			ticketNotCompleted = ' <button  class="btn btn-sm pull-right btn-danger"><span class="glyphicon glyphicon-remove" style="color:white"></span> not completed</button>',
+			todosPerPage       = 9,
+			pageNumber,
+			start;
+			
+		
+		var todos = $.ajax(
+				{
+				url : 'https://jsonplaceholder.typicode.com/todos',
+				dataType:'json',
+				async : false,
+				success:function(data){
+					return data;
+				}
+		}).responseText;
+		
+		todos = JSON.parse(todos);
+		numOfTasks = todos.length;
+		numOfPages = Math.ceil(numOfTasks/todosPerPage);
+		console.log(numOfPages);
+		
+		
+		for(i=0;i<numOfPages;i++)
+			$('.pagination').append('<li id="'+(i+1)+'"><a href="#">'+(i+1)+'</a></li>');
+		
+		$('.pagination #1').addClass('active');
+		
+		for(i=0;i<todosPerPage;i++){
+			$('#tickets').append(ticket);
+			$('.ticket').last().attr('id',''+(i+1));
+         	$('#tickets #'+(i+1)).html(ticketTitle+ticketBody);
+			$('#tickets #'+(i+1)+' .title').html('<strong> Task '+todos[i].id+'</strong>');
+			$('#tickets #'+(i+1)+' .description').html(todos[i].title);
+			if(todos[i].completed)
+				$('#tickets #'+(i+1)).append(ticketCompleted);
+			else
+				$('#tickets #'+(i+1)).append(ticketNotCompleted);
+			
+		}
+		$('.ticket').matchHeight();
+		
+		$('.pagination').children().click(function(){
+			$('#tickets').html('<h1>Tasks</h1>');
+			$(this).addClass('active');
+			$(this).siblings().removeClass('active');
+			
+			pageNumber = parseInt($(this).attr('id'));
+			start =  (pageNumber - 1)*todosPerPage;
+			
+			
+			for(i=start;i<start+todosPerPage;i++){
+			if(i == todos.length)
+				break;
+			$('#tickets').append(ticket);
+			$('.ticket').last().attr('id',''+(i+1));
+         	$('#tickets #'+(i+1)).html(ticketTitle+ticketBody);
+			$('#tickets #'+(i+1)+' .title').html('<strong> Task '+todos[i].id+'</strong>');
+			$('#tickets #'+(i+1)+' .description').html(todos[i].title);
+			if(todos[i].completed)
+				$('#tickets #'+(i+1)).append(ticketCompleted);
+			else
+				$('#tickets #'+(i+1)).append(ticketNotCompleted);
+			
+		}
+			$('.ticket').matchHeight(); 		
+		});
+		
+		
+
+			
+		
+		
+		
+		
+		
+		
+		
+		
+		
+
+		
+    });
+  </script>
+</body>
+</html>
